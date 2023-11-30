@@ -8,7 +8,7 @@
     public class SQLConfig
     {
         //SqlConnection connection = new SqlConnection("Server=VANANH;Database=QL_FashionShop;User Id=sa;Password=123;");
-        SqlConnection connection = new SqlConnection("Data Source=VANANH;Initial Catalog=QL_FashionShop;Integrated Security=True");
+        SqlConnection connection = new SqlConnection("Data Source=BAOBEII;Initial Catalog=QL_FashionShop;Integrated Security=True");
 
         //Truy vấn
         public bool ExecuteNonQuery(string query)

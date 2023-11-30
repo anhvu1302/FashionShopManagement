@@ -292,11 +292,13 @@ namespace FashionShopApp
         }
         private void sbtn_QLNhanVien_Click(object sender, EventArgs e)
         {
-
+            closeForm();
+            showFrm(new frmQLNhanVien());
         }
         private void sbtn_QLTaiKhoanNhanVien_Click(object sender, EventArgs e)
         {
-
+            closeForm();
+            showFrm(new frmQLTaiKhoanNV());
         }
         private void sbtn_PhanHoi_Click(object sender, EventArgs e)
         {

@@ -665,6 +665,58 @@ END;
 --delete from PhanHoi where IdKhachHang=41
 
 --============================================== Stored Procedures ==========================================---
+------------------Nguyen Quoc Bao------------
+CREATE PROCEDURE ThemNguoiDungNhanVien
+    @TenTaiKhoan VARCHAR(255),
+    @MatKhau VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @IdVaiTro INT = 3;  -- Mặc định vai trò là 3
+    
+    -- Kiểm tra xem Tên tài khoản đã tồn tại hay chưa
+    IF NOT EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan)
+    BEGIN
+        INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
+        VALUES (@TenTaiKhoan, @MatKhau, @IdVaiTro, 1, 0);  -- TonTai mặc định là 1 và Cam mặc định là 0
+
+        PRINT 'Tài khoản nhân viên đã được thêm thành công.';
+    END
+    ELSE
+    BEGIN
+        PRINT 'Tên tài khoản đã tồn tại. Vui lòng chọn một tên khác.';
+    END
+END;
+
+
+EXEC ThemNguoiDungNhanVien 
+    @TenTaiKhoan = 'BaoBell3', 
+    @MatKhau = '123ssss';
+
+SELECT * FROM NguoiDung;
+----------------------------------------------
+CREATE PROCEDURE LayThongTinNhanVien
+    @TenTaiKhoan VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra xem Tên tài khoản và Vai tro có tồn tại hay không
+    IF EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND IdVaiTro = 3)
+    BEGIN
+        -- Lấy thông tin nhân viên
+        SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND IdVaiTro = 3;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Tên tài khoản không tồn tại hoặc không phải là nhân viên.';
+    END
+END;
+
+-- Gọi stored procedure để lấy thông tin nhân viên với tên tài khoản cụ thể
+EXEC LayThongTinNhanVien @TenTaiKhoan = 'BaoBell';
+EXEC LayThongTinNhanVien @TenTaiKhoan = 'BaoBell3';
 
 
 
