@@ -269,6 +269,7 @@ CREATE TABLE SanPham (
   CONSTRAINT CHK_SoLuongDanhGia_SanPham CHECK(SoLuongDanhGia >= 0),
 );
 
+
 INSERT INTO SanPham VALUES(N'Đầm ngắn 2 dây', 9, 'product_img1.jpg', 'product_img1_compact1.jpg', 'product_img1_compact2.jpg', 1319000, 20, 89,N'Đầm ngắn 2 dây cup ngực sang trọng, gợi cảm\nTrang phục phù hợp dạo phố, thường ngày, đi tiệc...\nKích thước áo: S - M - L\nChiều dài: S : 60,5 cm - M: 62 cm - L : 63,5 cm', N'Kiểu dáng: Đầm ngắn\nChất liệu: cotton\nMàu sắc: Kem-Đen\nKích cỡ: S-M-L\nGiá đã bao gồm VAT)', N'Miễn phí giao hàng toàn quốc với đơn trên 1.000.000đ\nMiễn phí đổi trả trong 30 ngày', 1);
 INSERT INTO SanPham VALUES(N'Blazer nam trắng', 3, 'product_img2.jpg', 'product_img2_compact1.jpg', 'product_img2_compact2.jpg', 2199000, 30, 135,N'Áo Blazer nam phom Premio phù hợp mọi dáng người\nGam màu trung tính, lịch lãm tạo điểm nhấn nổi bật và thời thượng', N'Kiểu dáng:\nChất liệu: 100% Polyester\nMàu sắc: Đen-Trắng\nGiá đã bao gồm VAT)', N'Miễn phí giao hàng toàn quốc với đơn trên 1.000.000đ\nMiễn phí đổi trả trong 30 ngày', 1);
 INSERT INTO SanPham VALUES(N'Áo 2 dây xếp li', 5, 'product_img3.jpg', 'product_img3_compact1.jpg', 'product_img3_compact2.jpg', 359000, 15, 74, N'Áo 2 dây xếp li thời trang, nữ tính\nTrang phục phù hợp dạo phố, thường ngày, đi tiệc...\nKích thước áo: S - M - L\nS : 38.7cm &#8226; M : 39.4cm &#8226; L : 40.1cm', N'Kiểu dáng: Áo kiểu\nChất liệu: Linen\nMàu sắc: Kem-Đỏ\nKích cỡ: S-M-L\nGiá đã bao gồm VAT)', N'Miễn phí giao hàng toàn quốc với đơn trên 1.000.000đ\nMiễn phí đổi trả trong 30 ngày', 1);
@@ -665,6 +666,178 @@ END;
 --delete from PhanHoi where IdKhachHang=41
 
 --============================================== Stored Procedures ==========================================---
+---------------------------------------------Vũ Văn Anh-------------------------------------------
+
+-- Thêm sản phẩm
+CREATE PROCEDURE sp_ThemSanPham
+    @TenSanPham NVARCHAR(255),
+    @IdLoaiSP INT,
+    @AnhSP VARCHAR(255),
+    @AnhSPChiTiet1 VARCHAR(255),
+    @AnhSPChiTiet2 VARCHAR(255),
+    @GiaBan BIGINT,
+    @GiamGia INT,
+    @SoLuongDanhGia INT,
+    @NoiDungSanPham NVARCHAR(MAX),
+    @DanhGiaSanPham NVARCHAR(MAX),
+    @ThanhToanVanChuyen NVARCHAR(MAX),
+    @TonTai BIT
+AS
+BEGIN
+    INSERT INTO SanPham (TenSanPham, IdLoaiSP, AnhSP, AnhSPChiTiet1, AnhSPChiTiet2, GiaBan, GiamGia, SoLuongDanhGia, NoiDungSanPham, DanhGiaSanPham, ThanhToanVanChuyen, TonTai)
+    VALUES (@TenSanPham, @IdLoaiSP, @AnhSP, @AnhSPChiTiet1, @AnhSPChiTiet2, @GiaBan, @GiamGia, @SoLuongDanhGia, @NoiDungSanPham, @DanhGiaSanPham, @ThanhToanVanChuyen, @TonTai);
+END;
+
+
+-- Xóa sản phẩm
+CREATE PROCEDURE sp_XoaSanPham
+    @IdSanPham BIGINT
+AS
+BEGIN
+    DELETE FROM SanPham WHERE IdSanPham = @IdSanPham;
+END;
+
+
+-- Sửa sản phẩm 
+GO
+CREATE PROCEDURE sp_SuaSanPham
+    @IdSanPham BIGINT,
+    @TenSanPham NVARCHAR(255),
+    @IdLoaiSP INT,
+    @AnhSP VARCHAR(255),
+    @AnhSPChiTiet1 VARCHAR(255),
+    @AnhSPChiTiet2 VARCHAR(255),
+    @GiaBan BIGINT,
+    @GiamGia INT,
+    @SoLuongDanhGia INT,
+    @NoiDungSanPham NVARCHAR(MAX),
+    @DanhGiaSanPham NVARCHAR(MAX),
+    @ThanhToanVanChuyen NVARCHAR(MAX),
+    @TonTai BIT
+AS
+BEGIN
+    UPDATE SanPham
+    SET
+        TenSanPham = @TenSanPham,
+        IdLoaiSP = @IdLoaiSP,
+        AnhSP = @AnhSP,
+        AnhSPChiTiet1 = @AnhSPChiTiet1,
+        AnhSPChiTiet2 = @AnhSPChiTiet2,
+        GiaBan = @GiaBan,
+        GiamGia = @GiamGia,
+        SoLuongDanhGia = @SoLuongDanhGia,
+        NoiDungSanPham = @NoiDungSanPham,
+        DanhGiaSanPham = @DanhGiaSanPham,
+        ThanhToanVanChuyen = @ThanhToanVanChuyen,
+        TonTai = @TonTai
+    WHERE IdSanPham = @IdSanPham;
+END;
+
+
+-- Thêm đơn hàng
+GO
+CREATE PROCEDURE sp_ThemDonHang
+    @IdKhachHang BIGINT,
+    @SoDienThoai VARCHAR(10),
+    @DiaChiGiaoHang NVARCHAR(255),
+    @PhuongThucThanhToan NVARCHAR(30),
+    @ThoiGianDatHang DATETIME,
+    @ThoiGianGiaoHangDuKien DATETIME,
+    @TrangThaiDonHang NVARCHAR(30),
+    @TrangThaiThanhToan NVARCHAR(30)
+AS
+BEGIN
+    INSERT INTO DonHang (IdKhachHang, SoDienThoai, DiaChiGiaoHang, PhuongThucThanhToan, ThoiGianDatHang, ThoiGianGiaoHangDuKien, TrangThaiDonHang, TrangThaiThanhToan)
+    VALUES (@IdKhachHang, @SoDienThoai, @DiaChiGiaoHang, @PhuongThucThanhToan, @ThoiGianDatHang, @ThoiGianGiaoHangDuKien, @TrangThaiDonHang, @TrangThaiThanhToan);
+END;
+
+
+-- Xóa đơn hàng
+GO
+CREATE PROCEDURE sp_XoaDonHang
+    @IdDonHang BIGINT
+AS
+BEGIN
+    DELETE FROM DonHang WHERE IdDonHang = @IdDonHang;
+END;
+
+
+-- Sửa đơn hàng
+GO
+CREATE PROCEDURE sp_SuaDonHang
+    @IdDonHang BIGINT,
+    @IdKhachHang BIGINT,
+    @SoDienThoai VARCHAR(10),
+    @DiaChiGiaoHang NVARCHAR(255),
+    @PhuongThucThanhToan NVARCHAR(30),
+    @ThoiGianDatHang DATETIME,
+    @ThoiGianGiaoHangDuKien DATETIME,
+    @TrangThaiDonHang NVARCHAR(30),
+    @TrangThaiThanhToan NVARCHAR(30)
+AS
+BEGIN
+    UPDATE DonHang
+    SET
+        IdKhachHang = @IdKhachHang,
+        SoDienThoai = @SoDienThoai,
+        DiaChiGiaoHang = @DiaChiGiaoHang,
+        PhuongThucThanhToan = @PhuongThucThanhToan,
+        ThoiGianDatHang = @ThoiGianDatHang,
+        ThoiGianGiaoHangDuKien = @ThoiGianGiaoHangDuKien,
+        TrangThaiDonHang = @TrangThaiDonHang,
+        TrangThaiThanhToan = @TrangThaiThanhToan
+    WHERE IdDonHang = @IdDonHang;
+END;
+
+
+
+
+
+-- Thêm  chi tiết đơn hàng
+GO
+CREATE PROCEDURE sp_ThemChiTietDonHang
+    @IdDonHang BIGINT,
+    @IdSanPham BIGINT,
+    @SoLuong INT,
+    @DonGia FLOAT
+AS
+BEGIN
+    INSERT INTO ChiTietDonHang (IdDonHang, IdSanPham, SoLuong, DonGia)
+    VALUES (@IdDonHang, @IdSanPham, @SoLuong, @DonGia);
+END;
+
+
+-- Xóa chi tiết đơn hàng
+GO
+CREATE PROCEDURE sp_XoaChiTietDonHang
+    @IdDonHang BIGINT,
+    @IdSanPham BIGINT
+AS
+BEGIN
+    DELETE FROM ChiTietDonHang WHERE IdDonHang = @IdDonHang AND IdSanPham = @IdSanPham;
+END;
+
+
+
+-- Sửa chi tiết đơn hàng 
+GO
+CREATE PROCEDURE sp_SuaChiTietDonHang
+    @IdDonHang BIGINT,
+    @IdSanPham BIGINT,
+    @SoLuong INT,
+    @DonGia FLOAT
+AS
+BEGIN
+    UPDATE ChiTietDonHang
+    SET
+        SoLuong = @SoLuong,
+        DonGia = @DonGia
+    WHERE IdDonHang = @IdDonHang AND IdSanPham = @IdSanPham;
+END;
+
+
+
+
 
 
 
@@ -690,44 +863,6 @@ END;
 
 /* DECLARE @IdHoaDon BIGINT = 1;
 SELECT dbo.func_TongTienHoaDon(@IdHoaDon) AS TongTien; */
-
-
-GO
-
-CREATE FUNCTION func_TongTienDonHang(@IdDonhang BIGINT)
-RETURNS BIGINT
-AS
-BEGIN
-    DECLARE @Tong BIGINT;
-    SELECT @Tong = SUM(SoLuong * DonGia)
-    FROM ChiTietDonHang
-    WHERE IdDonHang = @IdDonhang;
-
-    RETURN ISNULL(@Tong, 0);
-END;
-
-/* DECLARE @IdDonhang BIGINT = 5;
-SELECT dbo.func_TongTienDonHang(@IdDonhang) AS TongTien; */
-
-GO
-
-CREATE FUNCTION func_TongTienDonHangCuaKhach(@IdKhachHang BIGINT,@Thang int,@Nam int)
-RETURNS BIGINT
-AS
-BEGIN
-	DECLARE @Tong BIGINT;
-    SELECT @Tong = SUM(SoLuong * DonGia)
-	FROM DonHang DH 
-	INNER JOIN ChiTietDonHang CTDH ON DH.IdDonHang = CTDH.IdDonHang
-	WHERE IdKhachHang = @IdKhachHang
-	AND ThoiGianDatHang >= DATEFROMPARTS(@Nam, @Thang, 1)
-	AND ThoiGianDatHang <= DATEADD(DAY, -1, DATEADD(MONTH, 1, DATEFROMPARTS(@Nam, @Thang, 1)))
-
-    RETURN ISNULL(@Tong, 0);
-END;
-
-/*	DECLARE @IdDonhang BIGINT = 6 ;
-SELECT dbo.func_TongTienDonHangCuaKhach(@IdDonhang, 10, 2023) AS TongTien;	*/
 
 
 GO
