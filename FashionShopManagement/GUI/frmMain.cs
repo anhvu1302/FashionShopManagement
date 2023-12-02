@@ -16,7 +16,7 @@ namespace FashionShopApp
 {
     public partial class frmMain : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         static string sql;
         public frmMain()
         {
@@ -99,27 +99,13 @@ namespace FashionShopApp
         }
         private void sbtn_QLSanPham_Click(object sender, EventArgs e)
         {
-            if (KiemTraQuyen())
-            {
-                closeForm();
-                showFrm(new frmSanPham());
-            }
-            else
-            {
-                MessageBox.Show("Bạn không có quyền sử dụng chức năng này.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            closeForm();
+            showFrm(new frmSanPham());
         }
         private void sbtn_QLLoaiSanPham_Click(object sender, EventArgs e)
         {
-            if (KiemTraQuyen())
-            {
-                closeForm();
-                showFrm(new frmLoaiSanPham());
-            }
-            else
-            {
-                MessageBox.Show("Bạn không có quyền sử dụng chức năng này.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            closeForm();
+            showFrm(new frmLoaiSanPham());
         }
 
         private void sbtn_KhachHang_Click(object sender, EventArgs e)
@@ -170,36 +156,6 @@ namespace FashionShopApp
         {
             closeForm();
             showFrm(new frmTK_KhachHang());
-        }
-        private void sbtn_DonHang_Click(object sender, EventArgs e)
-        {
-            if (toolStrip2 != null)
-            {
-                toolStrip2.Items.Clear();
-
-
-                //Quản lý đơn hàng
-                ToolStripButton sbtn_QLDonHang = new ToolStripButton();
-                sbtn_QLDonHang.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                sbtn_QLDonHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(54)))), ((int)(((byte)(137)))));
-                if (global::FashionShopApp.Properties.Resources.order != null)
-                    sbtn_QLDonHang.Image = global::FashionShopApp.Properties.Resources.order;
-                sbtn_QLDonHang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                sbtn_QLDonHang.ImageTransparentColor = System.Drawing.Color.Magenta;
-                sbtn_QLDonHang.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
-                sbtn_QLDonHang.Name = "sbtn_QLDonHang";
-                sbtn_QLDonHang.Size = new System.Drawing.Size(227, 35);
-                sbtn_QLDonHang.Text = "Quản Lý Đơn Hàng";
-                sbtn_QLDonHang.Click += new System.EventHandler(sbtn_QLDonHang_Click);
-                toolStrip2.Items.Add(sbtn_QLDonHang);
-
-
-
-            }
-        }
-        private void sbtn_QLDonHang_Click(object sender, EventArgs e)
-        {
-
         }
         private void sbtn_HoaDon_Click(object sender, EventArgs e)
         {
@@ -332,41 +288,27 @@ namespace FashionShopApp
             closeForm();
             showFrm(new frmPhanHoi());
         }
-        private void sbtn_ChiNhanh_Click(object sender, EventArgs e)
-        {
-            if (toolStrip2 != null)
-            {
-                toolStrip2.Items.Clear();
-
-
-                //Quản lý chi nhánh
-                ToolStripButton sbtn_QLChiNhanh = new ToolStripButton();
-                sbtn_QLChiNhanh.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                sbtn_QLChiNhanh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(54)))), ((int)(((byte)(137)))));
-                if (global::FashionShopApp.Properties.Resources.branch != null)
-                    sbtn_QLChiNhanh.Image = global::FashionShopApp.Properties.Resources.branch;
-                sbtn_QLChiNhanh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                sbtn_QLChiNhanh.ImageTransparentColor = System.Drawing.Color.Magenta;
-                sbtn_QLChiNhanh.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
-                sbtn_QLChiNhanh.Name = "sbtn_QLChiNhanh";
-                sbtn_QLChiNhanh.Size = new System.Drawing.Size(227, 35);
-                sbtn_QLChiNhanh.Text = "Quản Lý Chi Nhánh";
-                sbtn_QLChiNhanh.Click += new System.EventHandler(sbtn_QLChiNhanh_Click);
-                toolStrip2.Items.Add(sbtn_QLChiNhanh);
-
-
-
-            }
-        }
-        private void sbtn_QLChiNhanh_Click(object sender, EventArgs e)
-        {
-
-        }
         private void sbtn_Kho_Click(object sender, EventArgs e)
         {
             if (toolStrip2 != null)
             {
                 toolStrip2.Items.Clear();
+
+
+                //Quản lý hoá đơn nhập kho
+                ToolStripButton sbtn_QLHdNhapKho = new ToolStripButton();
+                sbtn_QLHdNhapKho.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                sbtn_QLHdNhapKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(54)))), ((int)(((byte)(137)))));
+                if (global::FashionShopApp.Properties.Resources.warehouse != null)
+                    sbtn_QLHdNhapKho.Image = global::FashionShopApp.Properties.Resources.warehouse;
+                sbtn_QLHdNhapKho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                sbtn_QLHdNhapKho.ImageTransparentColor = System.Drawing.Color.Magenta;
+                sbtn_QLHdNhapKho.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
+                sbtn_QLHdNhapKho.Name = "sbtn_QLHdNhapKho";
+                sbtn_QLHdNhapKho.Size = new System.Drawing.Size(227, 35);
+                sbtn_QLHdNhapKho.Text = "Quản Lý Hoá Đơn Nhập Kho";
+                sbtn_QLHdNhapKho.Click += new System.EventHandler(sbtn_QLHdNhapKho_Click);
+                toolStrip2.Items.Add(sbtn_QLHdNhapKho);
 
 
                 //Quản lý kho
@@ -388,9 +330,16 @@ namespace FashionShopApp
 
             }
         }
+
+        private void sbtn_QLHdNhapKho_Click(object sender, EventArgs e)
+        {
+            closeForm();
+            showFrm(new frmNhapKho());
+        }
         private void sbtn_QLKho_Click(object sender, EventArgs e)
         {
-
+            closeForm();
+            showFrm(new frmKho());
         }
         public void closeForm()
         {
@@ -422,14 +371,6 @@ namespace FashionShopApp
             }
             return temp;
 
-        }
-        private bool KiemTraQuyen()
-        {
-            if (NguoiDungHienTai.CurentUser.tenVaiTro == "Admin" || NguoiDungHienTai.CurentUser.tenVaiTro == "Quản lý")
-            {
-                return true;
-            }
-            return false;
         }
         private void sbtn_DangXuat_Click(object sender, EventArgs e)
         {

@@ -13,7 +13,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmTK_KhachHang : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         DataSet ds_tk = new DataSet();
         public frmTK_KhachHang()

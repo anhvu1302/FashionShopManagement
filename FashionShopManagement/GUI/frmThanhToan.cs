@@ -17,7 +17,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmThanhToan : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         private Timer timer = new Timer();
         public frmThanhToan()

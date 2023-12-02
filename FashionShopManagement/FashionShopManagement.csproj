@@ -47,9 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\frmPhanHoi.cs">
+    <Compile Include="GUI\frmNhapKho.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GUI\frmNhapKho.designer.cs">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmKho.Designer.cs">
+      <DependentUpon>frmKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.cs" />
     <Compile Include="GUI\frmPhanHoi.Designer.cs">
       <DependentUpon>frmPhanHoi.cs</DependentUpon>
     </Compile>
@@ -113,26 +123,17 @@
     <Compile Include="GUI\frmTK_KhachHang.Designer.cs">
       <DependentUpon>frmTK_KhachHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ChiNhanh.cs" />
-    <Compile Include="Model\ChiTietDonHang.cs" />
-    <Compile Include="Model\ChiTietHoaDonNhapKho.cs" />
-    <Compile Include="Model\DanhGiaSanPham.cs" />
-    <Compile Include="Model\DonHang.cs" />
-    <Compile Include="Model\HoaDon.cs" />
-    <Compile Include="Model\HoaDonNhapKho.cs" />
-    <Compile Include="Model\KhachHang.cs" />
-    <Compile Include="Model\Kho.cs" />
-    <Compile Include="Model\LoaiSanPham.cs" />
-    <Compile Include="Model\LoaiSanPhamCha.cs" />
     <Compile Include="Model\NguoiDung.cs" />
     <Compile Include="Model\NguoiDungHienTai.cs" />
-    <Compile Include="Model\NhanVien.cs" />
-    <Compile Include="Model\PhanHoi.cs" />
-    <Compile Include="Model\SanPham.cs" />
-    <Compile Include="Model\VaiTro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SQLConfig.cs" />
+    <EmbeddedResource Include="GUI\frmNhapKho.resx">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmKho.resx">
+      <DependentUpon>frmKho.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmPhanHoi.resx">
       <DependentUpon>frmPhanHoi.cs</DependentUpon>
     </EmbeddedResource>

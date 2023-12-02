@@ -7,7 +7,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmKhachHang : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         public frmKhachHang()
         {

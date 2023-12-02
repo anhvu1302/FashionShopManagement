@@ -247,6 +247,7 @@
             this.Controls.Add(this.txt_matkhau);
             this.Controls.Add(this.txt_tenTK);
             this.Controls.Add(this.txt_IdAcc);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmQLTaiKhoanNV";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
