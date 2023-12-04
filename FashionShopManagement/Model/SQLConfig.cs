@@ -8,7 +8,14 @@
     public class SQLConfig
     {
         //SqlConnection connection = new SqlConnection("Server=VANANH;Database=QL_FashionShop;User Id=sa;Password=123;");
-        SqlConnection connection = new SqlConnection("Data Source=BAOBEII;Initial Catalog=QL_FashionShop;Integrated Security=True");
+        //SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1LB6J34\\SQLEXPRESS;Initial Catalog=FashionShopManagement;Integrated Security=True");
+        private SqlConnection connection;
+
+        // Phương thức khởi tạo với chuỗi kết nối
+        public SQLConfig(string username, string password)
+        {
+            connection = new SqlConnection(string.Format("Server=DESKTOP-1LB6J34\\SQLEXPRESS;Database=FashionShopManagement;User Id={0};Password={1};",username,password));
+        }
 
         //Truy vấn
         public bool ExecuteNonQuery(string query)
@@ -84,6 +91,37 @@
                 connection.Close();
             }
             return result;
+        }
+        public bool ExecuteStoredProcedure(string storedProcedureName, SqlParameter[] parameters)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(storedProcedureName, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                if (parameters != null)
+                {
+                    command.Parameters.AddRange(parameters);
+                }
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Lỗi SQL: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return false;
         }
     }
 

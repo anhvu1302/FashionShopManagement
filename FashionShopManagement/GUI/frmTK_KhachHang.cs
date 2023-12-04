@@ -13,7 +13,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmTK_KhachHang : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         DataSet ds_tk = new DataSet();
         public frmTK_KhachHang()
@@ -65,7 +65,7 @@ namespace FashionShopApp.GUI
             int kq = int.Parse(check.ToString());
             if (kq <= 0)
             {
-                sql = string.Format("INSERT INTO NguoiDung VALUES('{0}','{1}',4,1,0)",
+                sql = string.Format("exec ThemTaiKhoanKH '{0}','{1}'",
                             txt_tenTK.Text,
                             txt_matkhau.Text);
                 config.ExecuteNonQuery(sql);
@@ -116,7 +116,7 @@ namespace FashionShopApp.GUI
                 }
                 else
                 {
-                    sql = string.Format("DELETE NguoiDung WHERE IdNguoiDung = {0}", txt_IdAcc.Text);
+                    sql = string.Format("exec XoaTaiKhoanKH '{0}'", txt_tenTK.Text);
                     config.ExecuteNonQuery(sql);
                     loadTKKhachHang();
                 }    

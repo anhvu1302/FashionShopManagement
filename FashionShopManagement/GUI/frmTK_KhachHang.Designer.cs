@@ -39,18 +39,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_SearchTK = new System.Windows.Forms.Button();
-            this.btn_CapNhat = new System.Windows.Forms.Button();
             this.txt_matkhau = new System.Windows.Forms.TextBox();
             this.txt_tenTK = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_CapNhat = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox4.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Luu
@@ -204,24 +204,6 @@
             this.btn_SearchTK.UseVisualStyleBackColor = false;
             this.btn_SearchTK.Click += new System.EventHandler(this.btn_SearchTK_Click);
             // 
-            // btn_CapNhat
-            // 
-            this.btn_CapNhat.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_CapNhat.FlatAppearance.BorderSize = 0;
-            this.btn_CapNhat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_CapNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.btn_CapNhat.Image = global::FashionShopApp.Properties.Resources.updated;
-            this.btn_CapNhat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_CapNhat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_CapNhat.Location = new System.Drawing.Point(421, 113);
-            this.btn_CapNhat.Name = "btn_CapNhat";
-            this.btn_CapNhat.Size = new System.Drawing.Size(129, 37);
-            this.btn_CapNhat.TabIndex = 40;
-            this.btn_CapNhat.Text = "Cập nhật";
-            this.btn_CapNhat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_CapNhat.UseVisualStyleBackColor = false;
-            this.btn_CapNhat.Click += new System.EventHandler(this.btn_CapNhat_Click);
-            // 
             // txt_matkhau
             // 
             this.txt_matkhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
@@ -262,6 +244,45 @@
             this.label11.TabIndex = 1;
             this.label11.Text = "Mật khẩu";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.27536F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.72464F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel1.Controls.Add(this.btn_Reset, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Luu, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Them, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_CapNhat, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Xoa, 3, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(43, 76);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.91228F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.08772F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(553, 171);
+            this.tableLayoutPanel1.TabIndex = 79;
+            // 
+            // btn_CapNhat
+            // 
+            this.btn_CapNhat.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_CapNhat.FlatAppearance.BorderSize = 0;
+            this.btn_CapNhat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_CapNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.btn_CapNhat.Image = global::FashionShopApp.Properties.Resources.updated;
+            this.btn_CapNhat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_CapNhat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_CapNhat.Location = new System.Drawing.Point(421, 113);
+            this.btn_CapNhat.Name = "btn_CapNhat";
+            this.btn_CapNhat.Size = new System.Drawing.Size(129, 37);
+            this.btn_CapNhat.TabIndex = 40;
+            this.btn_CapNhat.Text = "Cập nhật";
+            this.btn_CapNhat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_CapNhat.UseVisualStyleBackColor = false;
+            this.btn_CapNhat.Click += new System.EventHandler(this.btn_CapNhat_Click);
+            // 
             // dgv
             // 
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -284,27 +305,6 @@
             this.groupBox4.TabIndex = 78;
             this.groupBox4.TabStop = false;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.27536F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.72464F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
-            this.tableLayoutPanel1.Controls.Add(this.btn_Reset, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Luu, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Them, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btn_CapNhat, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Xoa, 3, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(43, 76);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.91228F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.08772F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(553, 171);
-            this.tableLayoutPanel1.TabIndex = 79;
-            // 
             // frmTK_KhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -315,14 +315,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmTK_KhachHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.frmTK_KhachHang_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

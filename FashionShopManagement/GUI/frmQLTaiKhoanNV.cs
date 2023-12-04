@@ -14,7 +14,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmQLTaiKhoanNV : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         
         public frmQLTaiKhoanNV()

@@ -17,7 +17,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmThanhToan : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         private Timer timer = new Timer();
         public frmThanhToan()
@@ -245,7 +245,7 @@ namespace FashionShopApp.GUI
         {
             if (txt_TongTien.Text != "" && txt_TienKhachDua.Text != "")
             {
-                string tongTienStr = txt_TongTien.Text.Replace("đ", "").Replace(".", "");
+                string tongTienStr = txt_TongTien.Text.Replace("đ", "").Replace(",", "");
                 int tongTienInt = int.Parse(tongTienStr);
                 txt_TienThoi.Text = (int.Parse(txt_TienKhachDua.Text) - tongTienInt).ToString("#,##0đ");
             }
@@ -293,6 +293,7 @@ namespace FashionShopApp.GUI
                     }
                     else
                     {
+                        bool success = false;
                         string tongTienStr = txt_TongTien.Text.Replace("đ", "").Replace(".", "");
                         if (lsvSanPham.Items.Count > 0)
                         {
@@ -303,21 +304,39 @@ namespace FashionShopApp.GUI
                             else
                                 sql = String.Format("INSERT INTO HoaDon VALUES ({0},{1},null,N'{2}',GETDATE()) SELECT SCOPE_IDENTITY() AS IdHoaDon;", txt_IdNhanVien.Text, cbo_ChiNhanh.SelectedValue, cbo_PtThanhToan.Text);
                             object result = config.ExecuteScalar(sql);
-                            int id = int.Parse(result.ToString());
-                            if (id > 0)
+                            if(result == null)
                             {
-                                foreach (ListViewItem item in lsvSanPham.Items)
-                                {
-                                    string sql2 = "INSERT INTO ChiTietHoaDon VALUES ('" + id + "','" + item.SubItems[0].Text + "'," + item.SubItems[3].Text + "," + item.SubItems[5].Text + ");";
-                                    config.ExecuteNonQuery(sql2);
-                                }
+                                success = false;
                             }
+                            else
+                            {
+                                int id = int.Parse(result.ToString());
+                                if (id > 0)
+                                {
+                                    foreach (ListViewItem item in lsvSanPham.Items)
+                                    {
+                                        string sql2 = "INSERT INTO ChiTietHoaDon VALUES ('" + id + "','" + item.SubItems[0].Text + "'," + item.SubItems[3].Text + "," + item.SubItems[5].Text + ");";
+
+                                        if (config.ExecuteNonQuery(sql2))
+                                            success = true;
+                                    }
+                                }
+                            }    
 
 
                         }
-                        InHoaDon();
-                        MessageBox.Show("Đã xuất hoá đơn thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ResetHoaDon();
+                        if(success)
+                        {
+                            InHoaDon();
+                            MessageBox.Show("Đã xuất hoá đơn thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ResetHoaDon();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Đã xuất hoá đơn không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
+
                     }
                 }
             }

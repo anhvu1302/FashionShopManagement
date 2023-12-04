@@ -13,7 +13,7 @@ namespace FashionShopApp
 {
     public partial class frmDangNhap : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig("sa","123");
         static string sql;
         public frmDangNhap()
         {
@@ -62,6 +62,7 @@ namespace FashionShopApp
                             {
                                 NguoiDungHienTai.CurentUser.nguoiDung.IdNguoiDung = int.Parse(row[0].ToString());
                                 NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan = row[1].ToString();
+                                NguoiDungHienTai.CurentUser.nguoiDung.MatKhau = row[2].ToString();
                                 NguoiDungHienTai.CurentUser.nguoiDung.IdVaiTro = int.Parse(row[3].ToString());
                                 NguoiDungHienTai.CurentUser.nguoiDung.TonTai = bool.Parse(row[4].ToString());
                                 NguoiDungHienTai.CurentUser.nguoiDung.Cam = bool.Parse(row[5].ToString());

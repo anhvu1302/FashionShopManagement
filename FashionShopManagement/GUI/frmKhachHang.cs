@@ -7,7 +7,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmKhachHang : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         public frmKhachHang()
         {
@@ -42,6 +42,7 @@ namespace FashionShopApp.GUI
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex >= 0)
             {
                 int index = e.RowIndex;
@@ -86,9 +87,11 @@ namespace FashionShopApp.GUI
             txt_diachi.Text = string.Empty;
             txt_sdt.Text = string.Empty;
             txt_mail.Text = string.Empty;
+
         }
         private void dgv_Click(object sender, EventArgs e)
         {
+            lvGiaoDich.Items.Clear();
             btn_CapNhatKH.Enabled = true;
             btn_XoaKH.Enabled = true;
             btn_ResetTextBox.Enabled = true;
@@ -176,7 +179,8 @@ namespace FashionShopApp.GUI
 
         private void btn_FindGD_Click(object sender, EventArgs e)
         {
-            sql = "SELECT IdHoaDon,NgayXuatHD,dbo.TongTienHoaDon(IdHoaDon)  AS TongTien from HoaDon where SoDienThoai='" + txt_sdt.Text + "'";
+            lvGiaoDich.Items.Clear();
+            sql = "SELECT * from dbo.func_TimLichSuGiaoDich('" + txt_sdt.Text + "')";
             DataTable dtGD = config.ExecuteSelectQuery(sql);
             if (dtGD.Rows.Count > 0)
             {
