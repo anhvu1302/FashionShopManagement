@@ -26,21 +26,24 @@ namespace FashionShopApp.GUI
             sql = "select IdNguoiDung,TenTaiKhoan,MatKhau,TonTai,Cam from NguoiDung where IdVaiTro!=4";
             DataTable dt = config.ExecuteSelectQuery(sql);
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã Người dùng";
-            dgv.Columns[1].HeaderText = "Tên Tài Khoản";
-            dgv.Columns[2].HeaderText = "Mật Khẩu";
-            dgv.Columns[3].HeaderText = "Tồn tại";
-            dgv.Columns[4].HeaderText = "Khoá";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã Người dùng";
+                dgv.Columns[1].HeaderText = "Tên Tài Khoản";
+                dgv.Columns[2].HeaderText = "Mật Khẩu";
+                dgv.Columns[3].HeaderText = "Tồn tại";
+                dgv.Columns[4].HeaderText = "Khoá";
+            }
             dgv.AllowUserToAddRows = false;
         }
-        private void frmTK_NhanVien_Load(object sender, EventArgs e)
-        {
-            loadTKNhanVien();
-            txt_IdAcc.Enabled = false;
-            btn_Luu.Enabled = false;
-            btn_Reset.Enabled = false;
-            txt_tenTK.Focus();
-        }
+        //private void frmTK_NhanVien_Load(object sender, EventArgs e)
+        //{
+        //    loadTKNhanVien();
+        //    txt_IdAcc.Enabled = false;
+        //    btn_Luu.Enabled = false;
+        //    btn_Reset.Enabled = false;
+        //    txt_tenTK.Focus();
+        //}
         void loadTKNhanVienSearch(string sql)
         {
             //sql = "select IdNguoiDung,TenTaiKhoan,MatKhau,TonTai,Cam from NguoiDung where IdVaiTro=4";
@@ -52,6 +55,15 @@ namespace FashionShopApp.GUI
             dgv.Columns[3].HeaderText = "Tồn tại";
             dgv.Columns[4].HeaderText = "Khoá";
             //dgv.AllowUserToAddRows = false;
+        }
+
+        private void frmQLTaiKhoanNV_Load(object sender, EventArgs e)
+        {
+            loadTKNhanVien();
+            txt_IdAcc.Enabled = false;
+            btn_Luu.Enabled = false;
+            btn_Reset.Enabled = false;
+            txt_tenTK.Focus();
         }
     }
 }

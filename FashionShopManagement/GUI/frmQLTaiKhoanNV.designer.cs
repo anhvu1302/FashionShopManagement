@@ -249,6 +249,7 @@
             this.Controls.Add(this.txt_IdAcc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmQLTaiKhoanNV";
+            this.Load += new System.EventHandler(this.frmQLTaiKhoanNV_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

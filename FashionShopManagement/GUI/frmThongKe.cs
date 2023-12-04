@@ -1,14 +1,6 @@
 ﻿using FashionShopApp.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -39,24 +31,30 @@ namespace FashionShopApp.GUI
             ch_Doanhso.Series.Add("Doanh Thu");
             sql = "SELECT * FROM LoaiSanPhamCha";
             DataTable dt = config.ExecuteSelectQuery(sql);
+
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
                     sql = string.Format("SELECT DBO.func_TinhDoanhSo({0},'{1}')", dr[0].ToString(), date);
                     Object result = config.ExecuteScalar(sql);
-                    int soLuong = int.Parse(result.ToString());
-                    ch_Doanhso.Series["Doanh Thu"].Points.AddXY(dr[1].ToString(), soLuong);
+                    if (result == null)
+                        return;
+                    else
+                    {
+                        int soLuong = int.Parse(result.ToString());
+                        ch_Doanhso.Series["Doanh Thu"].Points.AddXY(dr[1].ToString(), soLuong);
+                    }
+
 
                 }
             }
-
-            // Thiết lập kiểu biểu đồ (ví dụ: cột)
             ch_Doanhso.Series["Doanh Thu"].ChartType = SeriesChartType.Column;
 
-            // Đặt tên cho trục X và trục Y
             ch_Doanhso.ChartAreas[0].AxisX.Title = "Tháng";
             ch_Doanhso.ChartAreas[0].AxisY.Title = "Doanh Thu (VNĐ)";
+
+
         }
         void loadSoSanPham(string date)
         {
@@ -66,21 +64,26 @@ namespace FashionShopApp.GUI
 
             sql = "SELECT * FROM LoaiSanPhamCha";
             DataTable dt = config.ExecuteSelectQuery(sql);
-            if(dt.Rows.Count > 0)
+
+
+            if (dt.Rows.Count > 0)
             {
-                foreach(DataRow dr in dt.Rows)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    sql = string.Format("select dbo.func_DemSLSanPhamCha({0},'{1}')", dr[0].ToString(),date);
+                    sql = string.Format("select dbo.func_DemSLSanPhamCha({0},'{1}')", dr[0].ToString(), date);
                     Object result = config.ExecuteScalar(sql);
+                    if (result == null) return;
                     int soLuong = int.Parse(result.ToString());
                     ch_SanPham.Series["Số Lượng"].Points.AddXY(dr[1].ToString(), soLuong);
 
                 }
             }
-
             ch_SanPham.Series["Số Lượng"].ChartType = SeriesChartType.Column;
             ch_SanPham.ChartAreas[0].AxisX.Title = "Loại Sản Phẩm";
             ch_SanPham.ChartAreas[0].AxisY.Title = "Số lượng (Cái)";
+
+
+
         }
 
         private void dtp_soluong_ValueChanged(object sender, EventArgs e)

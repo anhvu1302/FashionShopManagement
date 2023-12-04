@@ -767,6 +767,7 @@ GRANT SELECT ON Kho TO RoleNhanVienKho
 GO
 GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleNhanVienKho
 
+<<<<<<< HEAD:FashionShopManagement.sql
 --role Quản lý
 GO
 sp_addrole 'RoleQuanLy'
@@ -775,6 +776,9 @@ GRANT SELECT,INSERT, UPDATE, DELETE,EXECUTE TO RoleQuanLy;
 GO
 GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleQuanLy
 GO
+=======
+
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 ----------------- add admin
 Use master
 GO
@@ -807,6 +811,7 @@ GO
 sp_adduser 'nhanvienkho1','nhanvienkho1' 
 GO
 sp_addrolemember 'RoleNhanVienKho','nhanvienkho1'
+<<<<<<< HEAD:FashionShopManagement.sql
 GO
 sp_addlogin 'nhanvienkho2','123456'
 Go
@@ -841,6 +846,12 @@ GO
 sp_adduser 'customer2','customer2'
 GO
 sp_addrolemember 'RoleKhachHang','customer2'
+=======
+
+
+
+
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 
 
 
@@ -1059,6 +1070,7 @@ BEGIN
         ThanhToanVanChuyen = @ThanhToanVanChuyen,
         TonTai = @TonTai
     WHERE IdSanPham = @IdSanPham;
+<<<<<<< HEAD:FashionShopManagement.sql
 END;
 ----------===========================================Hà Tri Thuỷ=============================================---
 
@@ -1141,9 +1153,20 @@ BEGIN
     BEGIN
         PRINT 'Tên tài khoản đã tồn tại. Vui lòng chọn một tên khác.';
     END
+=======
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 END;
+----------===========================================Hà Tri Thuỷ=============================================---
 
+GO
+CREATE PROCEDURE ThemTaiKhoanKH(
+    @TenTaiKhoan VARCHAR(255),
+    @MatKhau VARCHAR(255))
+AS
+BEGIN
+    SET NOCOUNT ON;
 
+<<<<<<< HEAD:FashionShopManagement.sql
 --EXEC ThemNguoiDungNhanVien 
 --    @TenTaiKhoan = 'BaoBell3', 
 --    @MatKhau = '123ssss';
@@ -1200,6 +1223,40 @@ BEGIN
         PRINT 'Lỗi: Tên tài khoản đã được sử dụng bởi người dùng khác.';
         RETURN;
     END
+=======
+    -- Thêm người dùng vào bảng NguoiDung
+    INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
+    VALUES (@TenTaiKhoan, @MatKhau, 4, 1, 0);
+
+    -- Tạo tài khoản người dùng
+    EXEC sp_addlogin @TenTaiKhoan, @MatKhau;
+
+    -- Thêm người dùng vào cơ sở dữ liệu
+    EXEC sp_adduser @TenTaiKhoan, @TenTaiKhoan;
+END;
+--GO
+--exec ThemTaiKhoanKH 'test','123'
+
+GO
+CREATE PROCEDURE XoaTaiKhoanKH
+    @TenTaiKhoan VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Xóa người dùng từ bảng NguoiDung
+    DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
+
+    -- Xóa tài khoản người dùng và login
+    IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
+    BEGIN
+        EXEC sp_dropuser @TenTaiKhoan;
+        EXEC sp_droplogin @TenTaiKhoan;
+    END;
+END;
+--go
+--exec XoaTaiKhoanKH'test'
+GO
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 
     BEGIN TRY
         -- Bắt đầu giao dịch
@@ -1359,6 +1416,7 @@ RETURN
 	INNER JOIN SanPham SP ON CT.IdSanPham = SP.IdSanPham 
 	WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho
 );
+<<<<<<< HEAD:FashionShopManagement.sql
 CREATE FUNCTION func_DemSLSanPhamCha(@IdLoaiSPCha int, @date varchar(20))
 RETURNS INT
 AS
@@ -1376,6 +1434,9 @@ BEGIN
 END
 go
 ----------===========================================Hà Tri Thuỷ=============================================---
+=======
+
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 GO
 CREATE FUNCTION func_DsSanPhamKhoTheoChiNhanh(@IdChiNhanh int)
 returns table
@@ -1401,6 +1462,7 @@ RETURN
         AND K.IdChiNhanh = @IdChiNhanh
 );
 GO
+<<<<<<< HEAD:FashionShopManagement.sql
 --SELECT * FROM dbo.func_FindSanPhamTheoChiNhanh(1,N'ĐẦM')
 CREATE FUNCTION func_TimLichSuGiaoDich
 (
@@ -1511,3 +1573,6 @@ GO
 --PRINT 'Tên đầy đủ của nhân viên là ' + @TenDayDu;
 --ELSE
 --PRINT 'Không tìm thấy thông tin cho IdNhanVien ' + CAST(@IdNhanVienTest AS NVARCHAR(10));
+=======
+SELECT * FROM dbo.func_FindSanPhamTheoChiNhanh(1,N'ĐẦM')
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql

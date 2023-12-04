@@ -28,14 +28,17 @@ namespace FashionShopApp.GUI
             sql = "SELECT * FROM NhanVien";
             DataTable dt = config.ExecuteSelectQuery(sql);
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "ID Nhân viên";
-            dgv.Columns[1].HeaderText = "ID Người dùng";
-            dgv.Columns[2].HeaderText = "Tên nhân viên";
-            dgv.Columns[3].HeaderText = "Ngày sinh";
-            dgv.Columns[4].HeaderText = "Giới tính";
-            dgv.Columns[5].HeaderText = "Địa chỉ";
-            dgv.Columns[6].HeaderText = "Số ĐT";
-            dgv.Columns[7].HeaderText = "Email";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "ID Nhân viên";
+                dgv.Columns[1].HeaderText = "ID Người dùng";
+                dgv.Columns[2].HeaderText = "Tên nhân viên";
+                dgv.Columns[3].HeaderText = "Ngày sinh";
+                dgv.Columns[4].HeaderText = "Giới tính";
+                dgv.Columns[5].HeaderText = "Địa chỉ";
+                dgv.Columns[6].HeaderText = "Số ĐT";
+                dgv.Columns[7].HeaderText = "Email";
+            }
         }
        
         private void ResetNhanVien()

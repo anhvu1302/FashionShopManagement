@@ -33,11 +33,14 @@ namespace FashionShopApp.GUI
             //sql = "select IdNguoiDung,TenTaiKhoan,MatKhau,TonTai,Cam from NguoiDung where IdVaiTro=4";
             DataTable dt = config.ExecuteSelectQuery(sql);
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã Người dùng";
-            dgv.Columns[1].HeaderText = "Tên Tài Khoản";
-            dgv.Columns[2].HeaderText = "Mật Khẩu";
-            dgv.Columns[3].HeaderText = "Tồn tại";
-            dgv.Columns[4].HeaderText = "Khoá";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã Người dùng";
+                dgv.Columns[1].HeaderText = "Tên Tài Khoản";
+                dgv.Columns[2].HeaderText = "Mật Khẩu";
+                dgv.Columns[3].HeaderText = "Tồn tại";
+                dgv.Columns[4].HeaderText = "Khoá";
+            }
             //dgv.AllowUserToAddRows = false;
         }
         void loadTKKhachHang()
@@ -45,11 +48,14 @@ namespace FashionShopApp.GUI
             sql = "select IdNguoiDung,TenTaiKhoan,MatKhau,TonTai,Cam from NguoiDung where IdVaiTro=4";
             DataTable dt = config.ExecuteSelectQuery(sql);
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã Người dùng";
-            dgv.Columns[1].HeaderText = "Tên Tài Khoản";
-            dgv.Columns[2].HeaderText = "Mật Khẩu";
-            dgv.Columns[3].HeaderText = "Tồn tại";
-            dgv.Columns[4].HeaderText = "Khoá";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã Người dùng";
+                dgv.Columns[1].HeaderText = "Tên Tài Khoản";
+                dgv.Columns[2].HeaderText = "Mật Khẩu";
+                dgv.Columns[3].HeaderText = "Tồn tại";
+                dgv.Columns[4].HeaderText = "Khoá";
+            }
             dgv.AllowUserToAddRows = false;
         }
         private void btn_Luu_Click(object sender, EventArgs e)

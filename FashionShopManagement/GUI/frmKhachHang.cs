@@ -29,14 +29,17 @@ namespace FashionShopApp.GUI
             DataTable dt = config.ExecuteSelectQuery(sql);
 
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã KH";
-            dgv.Columns[1].HeaderText = "Mã Tài Khoản";
-            dgv.Columns[2].HeaderText = "Tên Khách Hàng";
-            dgv.Columns[3].HeaderText = "Ngày sinh";
-            dgv.Columns[4].HeaderText = "Giới tính";
-            dgv.Columns[5].HeaderText = "Địa chỉ";
-            dgv.Columns[6].HeaderText = "Số ĐT";
-            dgv.Columns[7].HeaderText = "Email";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã KH";
+                dgv.Columns[1].HeaderText = "Mã Tài Khoản";
+                dgv.Columns[2].HeaderText = "Tên Khách Hàng";
+                dgv.Columns[3].HeaderText = "Ngày sinh";
+                dgv.Columns[4].HeaderText = "Giới tính";
+                dgv.Columns[5].HeaderText = "Địa chỉ";
+                dgv.Columns[6].HeaderText = "Số ĐT";
+                dgv.Columns[7].HeaderText = "Email";
+            }
             dgv.AllowUserToAddRows = false;
         }
 

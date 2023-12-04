@@ -70,12 +70,12 @@ namespace FashionShopApp
                             }
                         }
 
-                        if (NguoiDungHienTai.CurentUser.tenVaiTro == "Khách hàng")
-                        {
-                            MessageBox.Show("Bạn không có quyền truy cập vào hệ thống này.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
+                        //if (NguoiDungHienTai.CurentUser.tenVaiTro == "Khách hàng")
+                        //{
+                        //    MessageBox.Show("Bạn không có quyền truy cập vào hệ thống này.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //}
+                        //else
+                        //{
                             if (NguoiDungHienTai.CurentUser.nguoiDung.TonTai == true)
                             {
                                 if (NguoiDungHienTai.CurentUser.nguoiDung.Cam == false)
@@ -93,7 +93,7 @@ namespace FashionShopApp
                             {
                                 MessageBox.Show("Tài khoản đã bị xóa! Vui lòng liên hệ quản trị viên.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                        }
+                        //}
 
                     }
                     else

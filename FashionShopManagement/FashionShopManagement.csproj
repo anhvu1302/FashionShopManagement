@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\frmNhapKho.cs">
+<<<<<<< HEAD
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmNhapKho.designer.cs">
@@ -60,8 +61,20 @@
       <DependentUpon>frmKho.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmPhanHoi.cs">
+=======
+>>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GUI\frmNhapKho.designer.cs">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmKho.Designer.cs">
+      <DependentUpon>frmKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.cs" />
     <Compile Include="GUI\frmPhanHoi.Designer.cs">
       <DependentUpon>frmPhanHoi.cs</DependentUpon>
     </Compile>
