@@ -732,42 +732,39 @@ GO
 GRANT SELECT ON LoaiSanPhamCHa TO RoleKhachHang
 GO
 
--- role thu ngân
-sp_addrole 'RoleThuNgan'
-GRANT SELECT ON SanPham TO RoleThuNgan
+-- role Nhân viên
+sp_addrole 'RoleNhanVien'
+GRANT SELECT ON SanPham TO RoleNhanVien
 GO
-GRANT SELECT ON LoaiSanPham TO RoleThuNgan
+GRANT SELECT ON LoaiSanPham TO RoleNhanVien
 GO
-GRANT SELECT ON LoaiSanPhamCHa TO RoleThuNgan
+GRANT SELECT ON LoaiSanPhamCHa TO RoleNhanVien
 GO
-GRANT SELECT ON ChiNhanh TO RoleThuNgan
+GRANT SELECT ON ChiNhanh TO RoleNhanVien
 GO
-GRANT SELECT ON NhanVien TO RoleThuNgan
+GRANT SELECT ON NhanVien TO RoleNhanVien
 GO
-GRANT SELECT ON LoaiSanPhamCHa TO RoleThuNgan
+GRANT SELECT ON LoaiSanPhamCHa TO RoleNhanVien
 GO
-GRANT INSERT ON HoaDon TO RoleThuNgan
+GRANT INSERT ON HoaDon TO RoleNhanVien
 GO
-GRANT INSERT ON ChiTietHoaDon TO RoleThuNgan
+GRANT INSERT ON ChiTietHoaDon TO RoleNhanVien
 GO
+GRANT SELECT ON HoaDonNhapKho TO RoleNhanVien
+GO
+GRANT SELECT ON ChiTietHoaDonNhapKho TO RoleNhanVien
+GO
+GRANT SELECT ON SanPham TO RoleNhanVien
+GO
+GRANT SELECT ON ChiNhanh TO RoleNhanVien
+GO
+GRANT SELECT ON NhanVien TO RoleNhanVien
+GO
+GRANT SELECT ON Kho TO RoleNhanVien
+GO
+GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleNhanVien
 
--- role nhân viên kho
-sp_addrole 'RoleNhanVienKho'
-GRANT SELECT ON HoaDonNhapKho TO RoleNhanVienKho
-GO
-GRANT SELECT ON ChiTietHoaDonNhapKho TO RoleNhanVienKho
-GO
-GRANT SELECT ON SanPham TO RoleNhanVienKho
-GO
-GRANT SELECT ON ChiNhanh TO RoleNhanVienKho
-GO
-GRANT SELECT ON NhanVien TO RoleNhanVienKho
-GO
-GRANT SELECT ON Kho TO RoleNhanVienKho
-GO
-GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleNhanVienKho
 
-<<<<<<< HEAD:FashionShopManagement.sql
 --role Quản lý
 GO
 sp_addrole 'RoleQuanLy'
@@ -776,9 +773,7 @@ GRANT SELECT,INSERT, UPDATE, DELETE,EXECUTE TO RoleQuanLy;
 GO
 GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleQuanLy
 GO
-=======
 
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 ----------------- add admin
 Use master
 GO
@@ -789,8 +784,9 @@ GO
 sp_adduser 'admin','admin' 
 GO
 sp_addrolemember 'db_owner','admin'
+GO
 
---------------- add nhân viên thu ngân
+--------------- add nhân viên 
 
 Use master
 GO
@@ -800,8 +796,8 @@ Use FashionShopManagement
 GO
 sp_adduser 'nhanvien1','nhanvien1' 
 GO
-sp_addrolemember 'RoleThuNgan','nhanvien1'
------------------ add nhân viên kho
+sp_addrolemember 'RoleNhanVien','nhanvien1'
+GO
 Use master
 GO
 sp_addlogin 'nhanvienkho1','123456'
@@ -810,8 +806,9 @@ Use FashionShopManagement
 GO
 sp_adduser 'nhanvienkho1','nhanvienkho1' 
 GO
-sp_addrolemember 'RoleNhanVienKho','nhanvienkho1'
-<<<<<<< HEAD:FashionShopManagement.sql
+sp_addrolemember 'RoleNhanVien','nhanvienkho1'
+GO
+Use master
 GO
 sp_addlogin 'nhanvienkho2','123456'
 Go
@@ -819,10 +816,14 @@ Use FashionShopManagement
 GO
 sp_adduser 'nhanvienkho2','nhanvienkho2' 
 GO
-sp_addrolemember 'RoleNhanVienKho','nhanvienkho2'
+sp_addrolemember 'RoleNhanVien','nhanvienkho2'
+
 -----------------add quản lý
+Use master
 GO
 sp_addlogin 'quanly1' ,'123456'
+GO
+Use FashionShopManagement
 GO
 sp_adduser 'quanly1','quanly1'
 GO
@@ -834,26 +835,24 @@ sp_adduser 'quanly2','quanly2'
 GO
 sp_addrolemember 'RoleQuanLy','quanly2'
 ----------------add khách hàng
+Use master
 GO
 sp_addlogin 'customer1' ,'123456'
+GO
+Use FashionShopManagement
 GO
 sp_adduser 'customer1','customer1'
 GO
 sp_addrolemember 'RoleKhachHang','customer1'
+Use master
 GO
 sp_addlogin 'customer2' ,'123456'
+GO
+Use FashionShopManagement
 GO
 sp_adduser 'customer2','customer2'
 GO
 sp_addrolemember 'RoleKhachHang','customer2'
-=======
-
-
-
-
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
-
-
 
 
 
@@ -1070,7 +1069,7 @@ BEGIN
         ThanhToanVanChuyen = @ThanhToanVanChuyen,
         TonTai = @TonTai
     WHERE IdSanPham = @IdSanPham;
-<<<<<<< HEAD:FashionShopManagement.sql
+
 END;
 ----------===========================================Hà Tri Thuỷ=============================================---
 
@@ -1091,6 +1090,8 @@ BEGIN
 
     -- Thêm người dùng vào cơ sở dữ liệu
     EXEC sp_adduser @TenTaiKhoan, @TenTaiKhoan;
+
+	EXEC sp_addrolemember 'RoleKhachHang',@TenTaiKhoan
 END;
 --GO
 --exec ThemTaiKhoanKH 'test','123'
@@ -1110,6 +1111,7 @@ BEGIN
     BEGIN
         EXEC sp_dropuser @TenTaiKhoan;
         EXEC sp_droplogin @TenTaiKhoan;
+		EXEC sp_droprolemember 'RoleKhachHang',@TenTaiKhoan
     END;
 END;
 --go
@@ -1128,51 +1130,125 @@ BEGIN
 END;
 GO
 --exec proc_TimLichSuGiaoDich '0393123456'
+GO
+CREATE PROCEDURE XoaTaiKhoanNV
+    @TenTaiKhoan VARCHAR(255),@IdVaiTro int
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Xóa người dùng từ bảng NguoiDung
+    DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
+
+    -- Xóa tài khoản người dùng và login
+    IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
+    BEGIN
+        EXEC sp_dropuser @TenTaiKhoan;
+        EXEC sp_droplogin @TenTaiKhoan;
+		IF(@IdVaiTro=2)
+		EXEC sp_droprolemember 'RoleQuanLy',@TenTaiKhoan
+		else IF(@IdVaiTro=3)
+		EXEC sp_droprolemember 'RoleNhanVien',@TenTaiKhoan
+    END;
+END;
+
 
 --=================================Nguyễn Quốc Bảo==================================================---
---=======================================PROCEDURE 1==========================
 GO
 CREATE PROCEDURE ThemNguoiDungNhanVien
     @TenTaiKhoan VARCHAR(255),
-    @MatKhau VARCHAR(255)
+    @MatKhau VARCHAR(255),
+	@IdVaiTro INT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    DECLARE @IdVaiTro INT = 3;  -- Vai trò là 3
-    
-    -- Kiểm tra xem Tên tài khoản đã tồn tại hay chưa
-    IF NOT EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan)
+    -- Kiểm tra tính hợp lệ của dữ liệu đầu vào
+    IF @TenTaiKhoan IS NOT NULL AND @MatKhau IS NOT NULL
     BEGIN
-        INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
-        VALUES (@TenTaiKhoan, @MatKhau, @IdVaiTro, 1, 0);  -- TonTai mặc định là 1 và Cam mặc định là 0
+        BEGIN TRY
+            -- Kiểm tra xem Tên tài khoản đã tồn tại hay chưa
+            IF NOT EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan)
+            BEGIN
+                -- Thiết lập các trạng thái mặc định
+                INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
+                VALUES (@TenTaiKhoan, @MatKhau, @IdVaiTro, 1, 0);
 
-        PRINT 'Tài khoản nhân viên đã được thêm thành công.';
+                -- Thêm login và user
+                EXEC sp_addlogin @TenTaiKhoan, @MatKhau;
+                EXEC sp_adduser @TenTaiKhoan, @TenTaiKhoan;
+
+                -- Thêm vào vai trò tương ứng
+                IF @IdVaiTro = 2
+                    EXEC sp_addrolemember 'RoleQuanLy', @TenTaiKhoan;
+                ELSE IF @IdVaiTro = 3
+                    EXEC sp_addrolemember 'RoleNhanVien', @TenTaiKhoan;
+
+                PRINT N'Tài khoản nhân viên đã được thêm thành công.';
+            END
+            ELSE
+            BEGIN
+                PRINT N'Tên tài khoản đã tồn tại. Vui lòng chọn một tên khác.';
+            END
+        END TRY
+        BEGIN CATCH
+            -- Xử lý lỗi nếu có
+            PRINT 'Lỗi thêm tài khoản nhân viên.';
+            -- Thêm mã xử lý lỗi khác nếu cần
+        END CATCH;
     END
     ELSE
     BEGIN
-        PRINT 'Tên tài khoản đã tồn tại. Vui lòng chọn một tên khác.';
-    END
-=======
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
+        PRINT N'Dữ liệu đầu vào không hợp lệ.';
+    END;
 END;
-----------===========================================Hà Tri Thuỷ=============================================---
 
-GO
-CREATE PROCEDURE ThemTaiKhoanKH(
-    @TenTaiKhoan VARCHAR(255),
-    @MatKhau VARCHAR(255))
+
+
+EXEC ThemNguoiDungNhanVien 
+    @TenTaiKhoan = 'BaoBell3', 
+    @MatKhau = '123456',@IdVaiTro=2 ;
+
+--SELECT * FROM NguoiDung;
+Create PROCEDURE XoaTaiKhoanNV
+    @TenTaiKhoan NVARCHAR(255),
+    @IdVaiTro INT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-<<<<<<< HEAD:FashionShopManagement.sql
---EXEC ThemNguoiDungNhanVien 
---    @TenTaiKhoan = 'BaoBell3', 
---    @MatKhau = '123ssss';
+    -- Kiểm tra xem người dùng có tồn tại không
+    IF EXISTS (SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan)
+    BEGIN
+        BEGIN TRY
+            -- Xóa người dùng từ bảng NguoiDung
+            DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
 
---SELECT * FROM NguoiDung;
---=======================================PROCEDURE 2==========================
+            -- Kiểm tra xem vai trò có tồn tại không và xóa vai trò nếu cần
+            IF @IdVaiTro = 2 AND EXISTS (SELECT * FROM sys.database_principals WHERE name = 'RoleQuanLy')
+                EXEC sp_droprolemember 'RoleQuanLy', @TenTaiKhoan;
+            ELSE IF @IdVaiTro = 3 AND EXISTS (SELECT * FROM sys.database_principals WHERE name = 'RoleNhanVien')
+                EXEC sp_droprolemember 'RoleNhanVien', @TenTaiKhoan;
+
+            -- Xóa tài khoản người dùng và login
+            IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
+            BEGIN
+                EXEC sp_dropuser @TenTaiKhoan;
+                EXEC sp_droplogin @TenTaiKhoan;
+            END;
+        END TRY
+        BEGIN CATCH
+            -- Xử lý lỗi nếu có
+            PRINT 'Lỗi xóa tài khoản.';
+            -- Thêm mã xử lý lỗi khác nếu cần
+        END CATCH;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Người dùng không tồn tại.';
+    END;
+END;
+
+--exec XoaTaiKhoanNV 'BaoBell3','2'
 GO
 CREATE PROCEDURE LayThongTinNhanVien
     @TenTaiKhoan VARCHAR(255)
@@ -1195,7 +1271,6 @@ END;
 -- Gọi stored procedure để lấy thông tin nhân viên với tên tài khoản cụ thể
 --EXEC LayThongTinNhanVien @TenTaiKhoan = 'nhanvien1';
 --EXEC LayThongTinNhanVien @TenTaiKhoan = 'BaoBell3';
---=======================================PROCEDURE 3==========================
 GO
 CREATE PROCEDURE dbo.SuaThongTinNguoiDung
 (
@@ -1223,41 +1298,6 @@ BEGIN
         PRINT 'Lỗi: Tên tài khoản đã được sử dụng bởi người dùng khác.';
         RETURN;
     END
-=======
-    -- Thêm người dùng vào bảng NguoiDung
-    INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
-    VALUES (@TenTaiKhoan, @MatKhau, 4, 1, 0);
-
-    -- Tạo tài khoản người dùng
-    EXEC sp_addlogin @TenTaiKhoan, @MatKhau;
-
-    -- Thêm người dùng vào cơ sở dữ liệu
-    EXEC sp_adduser @TenTaiKhoan, @TenTaiKhoan;
-END;
---GO
---exec ThemTaiKhoanKH 'test','123'
-
-GO
-CREATE PROCEDURE XoaTaiKhoanKH
-    @TenTaiKhoan VARCHAR(255)
-AS
-BEGIN
-    SET NOCOUNT ON;
-    -- Xóa người dùng từ bảng NguoiDung
-    DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
-
-    -- Xóa tài khoản người dùng và login
-    IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
-    BEGIN
-        EXEC sp_dropuser @TenTaiKhoan;
-        EXEC sp_droplogin @TenTaiKhoan;
-    END;
-END;
---go
---exec XoaTaiKhoanKH'test'
-GO
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
-
     BEGIN TRY
         -- Bắt đầu giao dịch
         BEGIN TRANSACTION;
@@ -1307,8 +1347,83 @@ GO
 --    @Cam = @CamTest;
 
 --	select * from NguoiDung
+CREATE PROCEDURE dbo.SuaThongTinNhanVien
+(
+    @IdNguoiDung BIGINT,
+    @TenTaiKhoan NVARCHAR(255),
+    @MatKhau NVARCHAR(255),
+    @IdVaiTro INT,
+    @TonTai BIT,
+    @Cam BIT,
+    @TenNhanVien NVARCHAR(255),
+    @NgaySinh DATE,
+    @GioiTinh NCHAR(5),
+    @DiaChi NVARCHAR(255),
+    @SoDienThoai CHAR(10),
+    @Email VARCHAR(100)
+)
+AS
+BEGIN
+    DECLARE @IsSuccessful BIT = 0;
+
+    -- Kiểm tra xem người dùng có tồn tại hay không
+    IF NOT EXISTS (SELECT 1 FROM NguoiDung WHERE IdNguoiDung = @IdNguoiDung)
+    BEGIN
+        PRINT 'Lỗi: Người dùng không tồn tại.';
+        RETURN;
+    END
+
+    -- Kiểm tra xem có người dùng khác đã sử dụng tên tài khoản mới hay không
+    IF EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND IdNguoiDung != @IdNguoiDung)
+    BEGIN
+        PRINT 'Lỗi: Tên tài khoản đã được sử dụng bởi người dùng khác.';
+        RETURN;
+    END
+
+    BEGIN TRY
+        -- Bắt đầu giao dịch
+        BEGIN TRANSACTION;
+
+        -- Cập nhật thông tin người dùng
+        UPDATE NguoiDung
+        SET TenTaiKhoan = @TenTaiKhoan,
+            MatKhau = @MatKhau,
+            IdVaiTro = @IdVaiTro,
+            TonTai = @TonTai,
+            Cam = @Cam
+        WHERE IdNguoiDung = @IdNguoiDung;
+
+        -- Cập nhật thông tin nhân viên
+        UPDATE NhanVien
+        SET TenNhanVien = @TenNhanVien,
+            NgaySinh = @NgaySinh,
+            GioiTinh = @GioiTinh,
+            DiaChi = @DiaChi,
+            SoDienThoai = @SoDienThoai,
+            Email = @Email
+        WHERE IdNguoiDung = @IdNguoiDung;
+
+        -- Commit giao dịch nếu không có lỗi
+        COMMIT;
+        SET @IsSuccessful = 1;
+    END TRY
+    BEGIN CATCH
+        -- Rollback giao dịch nếu có lỗi
+        ROLLBACK;
+        PRINT 'Lỗi: ' + ERROR_MESSAGE();
+        RETURN; -- Return to prevent further execution
+    END CATCH
+
+    -- In thông báo thành công hoặc thất bại
+    IF @IsSuccessful = 1
+        PRINT 'Cập nhật thông tin nhân viên thành công.';
+    ELSE
+        PRINT 'Cập nhật thông tin nhân viên thất bại.';
+END;
+
 
 --============================================== Function ==========================================---
+---------------------------------------------Vũ Văn Anh-------------------------------------------
 GO
 
 CREATE FUNCTION func_TongTienHoaDon(@IdHoaDon BIGINT)
@@ -1416,7 +1531,7 @@ RETURN
 	INNER JOIN SanPham SP ON CT.IdSanPham = SP.IdSanPham 
 	WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho
 );
-<<<<<<< HEAD:FashionShopManagement.sql
+go
 CREATE FUNCTION func_DemSLSanPhamCha(@IdLoaiSPCha int, @date varchar(20))
 RETURNS INT
 AS
@@ -1434,9 +1549,6 @@ BEGIN
 END
 go
 ----------===========================================Hà Tri Thuỷ=============================================---
-=======
-
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
 GO
 CREATE FUNCTION func_DsSanPhamKhoTheoChiNhanh(@IdChiNhanh int)
 returns table
@@ -1462,7 +1574,7 @@ RETURN
         AND K.IdChiNhanh = @IdChiNhanh
 );
 GO
-<<<<<<< HEAD:FashionShopManagement.sql
+
 --SELECT * FROM dbo.func_FindSanPhamTheoChiNhanh(1,N'ĐẦM')
 CREATE FUNCTION func_TimLichSuGiaoDich
 (
@@ -1498,7 +1610,27 @@ BEGIN
 END
 --SELECT DBO.func_TinhDoanhSo(1,'2023/12/04')
 --=================================Nguyễn Quốc Bảo=================================---
+go
+create function func_ShowTaiKhoanNV()
+returns table
+as
+	return(select IdNguoiDung,TenTaiKhoan,MatKhau,TenVaiTro,TonTai,Cam 
+	from NguoiDung ND
+	inner join VaiTro on VaiTro.IdVaiTro=ND.IdVaiTro
+	where (ND.IdVaiTro!=4 and ND.IdVaiTro!=1))
 GO
+--select *from dbo.func_ShowTaiKhoanNV()
+go
+create function func_FindTaiKhoanNV(@TenTaiKhoan varchar(255))
+returns table
+as
+	return(select IdNguoiDung,TenTaiKhoan,MatKhau,TenVaiTro,TonTai,Cam 
+	from NguoiDung ND
+	inner join VaiTro on VaiTro.IdVaiTro=ND.IdVaiTro
+	where (ND.IdVaiTro!=4 and ND.IdVaiTro!=1)and ND.TenTaiKhoan=@TenTaiKhoan) 
+GO
+--select *from dbo.func_FindTaiKhoanNV('quanly1')
+
 CREATE FUNCTION func_TinhTuoiNhanVien
 (
     @IdNhanVien BIGINT
@@ -1573,6 +1705,6 @@ GO
 --PRINT 'Tên đầy đủ của nhân viên là ' + @TenDayDu;
 --ELSE
 --PRINT 'Không tìm thấy thông tin cho IdNhanVien ' + CAST(@IdNhanVienTest AS NVARCHAR(10));
-=======
-SELECT * FROM dbo.func_FindSanPhamTheoChiNhanh(1,N'ĐẦM')
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20:QL_FashionShop.sql
+
+--SELECT * FROM dbo.func_FindSanPhamTheoChiNhanh(1,N'ĐẦM')
+

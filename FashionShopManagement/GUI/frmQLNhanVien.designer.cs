@@ -66,6 +66,7 @@
             // 
             resources.ApplyResources(this.txt_IDNguoiDung, "txt_IDNguoiDung");
             this.txt_IDNguoiDung.Name = "txt_IDNguoiDung";
+            this.txt_IDNguoiDung.ReadOnly = true;
             // 
             // txt_TenNhanVien
             // 

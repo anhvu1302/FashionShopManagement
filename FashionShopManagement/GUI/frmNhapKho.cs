@@ -30,6 +30,8 @@ namespace FashionShopApp.GUI
             LoadListHoaDonNhap();
             LoadCboIdHoaDonNhap();
             LoadCboTenSanPham();
+            frmMain frmMain = new frmMain();
+            cbo_NhanVien.Text = frmMain.TenNguoiDungHienTai();
         }
         public void LoadCboIdHoaDonNhap()
         {

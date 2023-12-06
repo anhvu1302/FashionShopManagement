@@ -241,7 +241,9 @@ namespace FashionShopApp.GUI
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE SanPham SET TenSanPham = N'{0}', IdLoaiSP = {1}, AnhSP = '{2}', AnhSPChiTiet1 = '{3}', AnhSPChiTiet2 = '{4}', GiaBan = {5}, GiamGia = {6}, SoLuongDanhGia = {7}, NoiDungSanPham = N'{8}', DanhGiaSanPham = N'{9}', ThanhToanVanChuyen = N'{10}', TonTai = {11} WHERE IdSanPham = {12}",
+                if(cbo_LoaiSanPham.SelectedValue != null && cbo_TonTai.SelectedValue!=null)
+                {
+                    sql = string.Format("UPDATE SanPham SET TenSanPham = N'{0}', IdLoaiSP = {1}, AnhSP = '{2}', AnhSPChiTiet1 = '{3}', AnhSPChiTiet2 = '{4}', GiaBan = {5}, GiamGia = {6}, SoLuongDanhGia = {7}, NoiDungSanPham = N'{8}', DanhGiaSanPham = N'{9}', ThanhToanVanChuyen = N'{10}', TonTai = {11} WHERE IdSanPham = {12}",
                     txt_TenSanPham.Text,
                     cbo_LoaiSanPham.SelectedValue.ToString(),
                     imagePath1,
@@ -255,7 +257,7 @@ namespace FashionShopApp.GUI
                     txt_ThanhToanVanChuyen.Text,
                     cbo_TonTai.SelectedValue.ToString(),
                     txt_IdSanPham.Text);
-
+                }    
                 if (config.ExecuteNonQuery(sql))
                 {
                     MessageBox.Show("Cập nhập thông tin sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -266,12 +268,14 @@ namespace FashionShopApp.GUI
                 }
                 LoadListSanPham();
             }
-
+            
         }
 
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
-            sql = string.Format("INSERT INTO SanPham VALUES (N'{0}',{1},'{2}','{3}','{4}',{5},{6},{7},N'{8}',N'{9}',N'{10}',1);",
+            if (cbo_LoaiSanPham.SelectedValue != null && cbo_TonTai.SelectedValue != null)
+            {
+                sql = string.Format("INSERT INTO SanPham VALUES (N'{0}',{1},'{2}','{3}','{4}',{5},{6},{7},N'{8}',N'{9}',N'{10}',1);",
                 txt_TenSanPham.Text,
                 cbo_LoaiSanPham.SelectedValue.ToString(),
                 imagePath1,
@@ -283,7 +287,7 @@ namespace FashionShopApp.GUI
                 txt_NoiDungSanPham.Text,
                 txt_DanhGiaSanPham.Text,
                 txt_ThanhToanVanChuyen.Text);
-
+            }
             if (config.ExecuteNonQuery(sql))
             {
                 MessageBox.Show("Thêm sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

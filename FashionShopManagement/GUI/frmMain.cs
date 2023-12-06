@@ -358,7 +358,7 @@ namespace FashionShopApp
             frm.TopLevel = false;
             frm.Show();
         }
-        private string TenNguoiDungHienTai()
+        public string TenNguoiDungHienTai()
         {
             string temp = null;
             sql = "SELECT TenNhanVien FROM NhanVien WHERE IdNguoiDung = " + NguoiDungHienTai.CurentUser.nguoiDung.IdNguoiDung;

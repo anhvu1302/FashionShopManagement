@@ -39,7 +39,7 @@ namespace FashionShopApp.GUI
                 dgv.Columns[1].HeaderText = "Tên Tài Khoản";
                 dgv.Columns[2].HeaderText = "Mật Khẩu";
                 dgv.Columns[3].HeaderText = "Tồn tại";
-                dgv.Columns[4].HeaderText = "Khoá";
+                dgv.Columns[4].HeaderText = "Cấm";
             }
             //dgv.AllowUserToAddRows = false;
         }
@@ -54,7 +54,7 @@ namespace FashionShopApp.GUI
                 dgv.Columns[1].HeaderText = "Tên Tài Khoản";
                 dgv.Columns[2].HeaderText = "Mật Khẩu";
                 dgv.Columns[3].HeaderText = "Tồn tại";
-                dgv.Columns[4].HeaderText = "Khoá";
+                dgv.Columns[4].HeaderText = "Cấm";
             }
             dgv.AllowUserToAddRows = false;
         }
@@ -117,7 +117,7 @@ namespace FashionShopApp.GUI
                 if (kq > 0)
                 {
                     MessageBox.Show("Không thể xoá Người Dùng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txt_IdAcc.Focus();
+                    txt_tenTK.Focus();
                     return;
                 }
                 else
@@ -136,7 +136,7 @@ namespace FashionShopApp.GUI
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE NguoiDung SET TenTaiKhoan = '{0}',MatKhau='{1}'  WHERE IdNguoiDung = {2}", txt_tenTK.Text, txt_matkhau.Text,txt_IdAcc.Text);
+                sql = string.Format("UPDATE NguoiDung SET MatKhau='{0}',TonTai='{1}',Cam='{2}'  WHERE IdNguoiDung = {3}", txt_matkhau.Text,chk_tontai.Checked,chk_Ban.Checked,txt_IdAcc.Text);
                 config.ExecuteNonQuery(sql);
                 loadTKKhachHang();
             }
@@ -152,6 +152,8 @@ namespace FashionShopApp.GUI
             txt_IdAcc.Text = string.Empty;
             txt_tenTK.Text = string.Empty;
             txt_matkhau.Text = string.Empty;
+            chk_Ban.Checked = false;
+            chk_tontai.Checked = false;
         }
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -161,6 +163,8 @@ namespace FashionShopApp.GUI
                 txt_IdAcc.Text = dgv.Rows[index].Cells[0].Value.ToString();
                 txt_tenTK.Text = dgv.Rows[index].Cells[1].Value.ToString();
                 txt_matkhau.Text = dgv.Rows[index].Cells[2].Value.ToString();
+                chk_tontai.Checked = Convert.ToBoolean(dgv.Rows[index].Cells[3].Value.ToString());
+                chk_Ban.Checked = Convert.ToBoolean(dgv.Rows[index].Cells[4].Value.ToString());
             }
         }
 

@@ -47,6 +47,8 @@
             this.btn_CapNhat = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chk_tontai = new System.Windows.Forms.CheckBox();
+            this.chk_Ban = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -174,12 +176,14 @@
             this.groupBox2.Controls.Add(this.txt_IdAcc);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txt_matkhau);
+            this.groupBox2.Controls.Add(this.chk_Ban);
             this.groupBox2.Controls.Add(this.txt_tenTK);
+            this.groupBox2.Controls.Add(this.chk_tontai);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.groupBox2.Location = new System.Drawing.Point(411, 63);
+            this.groupBox2.Location = new System.Drawing.Point(411, 85);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(644, 258);
             this.groupBox2.TabIndex = 76;
@@ -286,7 +290,7 @@
             // dgv
             // 
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(65, 26);
+            this.dgv.Location = new System.Drawing.Point(32, 25);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 51;
             this.dgv.RowTemplate.Height = 24;
@@ -304,6 +308,28 @@
             this.groupBox4.Size = new System.Drawing.Size(644, 254);
             this.groupBox4.TabIndex = 78;
             this.groupBox4.TabStop = false;
+            // 
+            // chk_tontai
+            // 
+            this.chk_tontai.AutoSize = true;
+            this.chk_tontai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_tontai.Location = new System.Drawing.Point(493, 17);
+            this.chk_tontai.Name = "chk_tontai";
+            this.chk_tontai.Size = new System.Drawing.Size(88, 26);
+            this.chk_tontai.TabIndex = 44;
+            this.chk_tontai.Text = "Tồn tại";
+            this.chk_tontai.UseVisualStyleBackColor = true;
+            // 
+            // chk_Ban
+            // 
+            this.chk_Ban.AutoSize = true;
+            this.chk_Ban.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_Ban.Location = new System.Drawing.Point(493, 46);
+            this.chk_Ban.Name = "chk_Ban";
+            this.chk_Ban.Size = new System.Drawing.Size(69, 26);
+            this.chk_Ban.TabIndex = 44;
+            this.chk_Ban.Text = "Cấm";
+            this.chk_Ban.UseVisualStyleBackColor = true;
             // 
             // frmTK_KhachHang
             // 
@@ -349,5 +375,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btn_SearchTK;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckBox chk_tontai;
+        private System.Windows.Forms.CheckBox chk_Ban;
     }
 }

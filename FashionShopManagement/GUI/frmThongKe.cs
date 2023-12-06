@@ -22,8 +22,8 @@ namespace FashionShopApp.GUI
             DateTime currentDate = DateTime.Now;
             string formattedDate = currentDate.ToString("yyyy/MM/dd");
 
-            loadDoanhSo(formattedDate);
-            loadSoSanPham(formattedDate);
+            //loadDoanhSo("2023/12/04");
+            //loadSoSanPham(formattedDate);
         }
         void loadDoanhSo(string date)
         {
@@ -45,7 +45,6 @@ namespace FashionShopApp.GUI
                         int soLuong = int.Parse(result.ToString());
                         ch_Doanhso.Series["Doanh Thu"].Points.AddXY(dr[1].ToString(), soLuong);
                     }
-
 
                 }
             }

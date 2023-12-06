@@ -98,7 +98,7 @@ namespace FashionShopApp
                     }
                     else
                     {
-                        MessageBox.Show("Tài khoản không tồn tại! Vui lòng liên hệ quản trị viên.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
