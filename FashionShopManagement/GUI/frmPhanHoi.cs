@@ -1,6 +1,13 @@
 ﻿using FashionShopApp.Model;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FashionShopApp
@@ -19,35 +26,28 @@ namespace FashionShopApp
             DataTable dt = config.ExecuteSelectQuery(sql);
 
             dgv.DataSource = dt;
-            if (dt.Rows.Count > 0)
-            {
-                dgv.Columns[0].HeaderText = "Mã Phản hồi";
-                dgv.Columns[1].HeaderText = "Mã Khách Hàng";
-                dgv.Columns[2].HeaderText = "Tên Khách Hàng";
-                dgv.Columns[3].HeaderText = "Số điện thoại";
-                dgv.Columns[4].HeaderText = "Vấn đề";
-                dgv.Columns[5].HeaderText = "Nội dung vấn đề";
-                dgv.Columns[6].HeaderText = "Thời gian gửi phản hồi";
-
-            }
+            dgv.Columns[0].HeaderText = "Mã Phản hồi";
+            dgv.Columns[1].HeaderText = "Mã Khách Hàng";
+            dgv.Columns[2].HeaderText = "Tên Khách Hàng";
+            dgv.Columns[3].HeaderText = "Số điện thoại";
+            dgv.Columns[4].HeaderText = "Vấn đề";
+            dgv.Columns[5].HeaderText = "Nội dung vấn đề";
+            dgv.Columns[6].HeaderText = "Thời gian gửi phản hồi";
             dgv.AllowUserToAddRows = false;
         }
         void loadPhanHoi()
         {
-            sql = "SELECT IdPhanHoi,KhachHang.IdKhachHang,TenKhachHang,PhanHoi.SoDienThoai,VanDe, NoiDungVanDe,PhanHoi.ThoiGianPhanHoi \r\nFROM PhanHoi\r\ninner join KhachHang on KhachHang.IdKhachHang=PhanHoi.IdKhachHang where PhanHoi.IdKhachHang='" + txt_makh.Text + "'";
+            sql = "SELECT IdPhanHoi,KhachHang.IdKhachHang,TenKhachHang,PhanHoi.SoDienThoai,VanDe, NoiDungVanDe,PhanHoi.ThoiGianPhanHoi \r\nFROM PhanHoi\r\ninner join KhachHang on KhachHang.IdKhachHang=PhanHoi.IdKhachHang where PhanHoi.IdKhachHang='"+txt_makh.Text+"'";
             DataTable dt = config.ExecuteSelectQuery(sql);
 
             dgv.DataSource = dt;
-            if (dt.Rows.Count > 0)
-            {
-                dgv.Columns[0].HeaderText = "Mã Phản hồi";
-                dgv.Columns[1].HeaderText = "Mã Khách Hàng";
-                dgv.Columns[2].HeaderText = "Tên Khách Hàng";
-                dgv.Columns[3].HeaderText = "Số điện thoại";
-                dgv.Columns[4].HeaderText = "Vấn đề";
-                dgv.Columns[5].HeaderText = "Nội dung vấn đề";
-                dgv.Columns[6].HeaderText = "Thời gian gửi phản hồi";
-            }
+            dgv.Columns[0].HeaderText = "Mã Phản hồi";
+            dgv.Columns[1].HeaderText = "Mã Khách Hàng";
+            dgv.Columns[2].HeaderText = "Tên Khách Hàng";
+            dgv.Columns[3].HeaderText = "Số điện thoại";
+            dgv.Columns[4].HeaderText = "Vấn đề";
+            dgv.Columns[5].HeaderText = "Nội dung vấn đề";
+            dgv.Columns[6].HeaderText = "Thời gian gửi phản hồi";
             dgv.AllowUserToAddRows = false;
         }
         private void frmPhanHoiKH_Load(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace FashionShopApp
             loadDanhSachPhanHoi();
             txt_tenKH.Enabled = false;
             dtp_phanhoi.Enabled = false;
-
+            
         }
 
         private void btn_Xoa_Click(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace FashionShopApp
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE PhanHoi SET SoDienThoai='{0}' ,VanDe = N'{1}',NoiDungVanDe=N'{2}',ThoiGianPhanHoi = Getdate() WHERE IdPhanHoi = {4} ", txt_sdt.Text, cboVanDe.Text, r_NDVanDe.Text, dtp_phanhoi.Text, txt_maPhanHoi.Text);
+                sql = string.Format("UPDATE PhanHoi SET SoDienThoai='{0}' ,VanDe = N'{1}',NoiDungVanDe=N'{2}',ThoiGianPhanHoi = Getdate() WHERE IdPhanHoi = {4} ", txt_sdt.Text, cboVanDe.Text, r_NDVanDe.Text, dtp_phanhoi.Text,  txt_maPhanHoi.Text);
                 config.ExecuteNonQuery(sql);
                 loadDanhSachPhanHoi();
             }
@@ -94,7 +94,7 @@ namespace FashionShopApp
             cboVanDe.Text = string.Empty;
             r_NDVanDe.Text = string.Empty;
             dtp_phanhoi.Text = string.Empty;
-            loadDanhSachPhanHoi();
+            loadDanhSachPhanHoi() ;
         }
 
         private void btn_Find_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace FashionShopApp
             if (e.RowIndex >= 0)
             {
                 int index = e.RowIndex;
-                txt_maPhanHoi.Text = dgv.Rows[index].Cells[0].Value.ToString();
+                txt_maPhanHoi.Text=dgv.Rows[index].Cells[0].Value.ToString();
                 txt_makh.Text = dgv.Rows[index].Cells[1].Value.ToString();
                 txt_tenKH.Text = dgv.Rows[index].Cells[2].Value.ToString();
                 txt_sdt.Text = dgv.Rows[index].Cells[3].Value.ToString();
@@ -124,7 +124,7 @@ namespace FashionShopApp
 
         private void btn_Gui_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txt_makh.Text) || string.IsNullOrEmpty(txt_sdt.Text) || string.IsNullOrEmpty(btn_RsRichtxt.Text) || string.IsNullOrEmpty(cboVanDe.Text))
+            if (string.IsNullOrEmpty(txt_makh.Text) || string.IsNullOrEmpty(txt_sdt.Text) || string.IsNullOrEmpty(btn_RsRichtxt.Text) || string.IsNullOrEmpty(cboVanDe.Text) )
             {
                 MessageBox.Show("Chưa nhập đủ dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txt_makh.Focus();
@@ -137,11 +137,11 @@ namespace FashionShopApp
                                 txt_sdt.Text,
                                 cboVanDe.Text,
                                 r_NDVanDe.Text
-
+                                
                                );
                 config.ExecuteNonQuery(sql);
                 loadDanhSachPhanHoi();
-            }
+            }    
         }
 
         private void dgv_Click(object sender, EventArgs e)

@@ -47,37 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\frmNhapKho.cs">
-<<<<<<< HEAD
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmNhapKho.designer.cs">
-      <DependentUpon>frmNhapKho.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\frmKho.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmKho.Designer.cs">
-      <DependentUpon>frmKho.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\frmPhanHoi.cs">
-=======
->>>>>>> 9680715737185c1cb2711c367e5d1489e2c1fd20
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmNhapKho.designer.cs">
-      <DependentUpon>frmNhapKho.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\frmKho.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmKho.Designer.cs">
-      <DependentUpon>frmKho.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\frmPhanHoi.cs" />
-    <Compile Include="GUI\frmPhanHoi.Designer.cs">
-      <DependentUpon>frmPhanHoi.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\frmHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +58,12 @@
     </Compile>
     <Compile Include="GUI\frmKhachHang.designer.cs">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmKho.designer.cs">
+      <DependentUpon>frmKho.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmLoaiSanPham.cs">
       <SubType>Form</SubType>
@@ -107,6 +82,18 @@
     </Compile>
     <Compile Include="GUI\frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmNhapKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmNhapKho.designer.cs">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.designer.cs">
+      <DependentUpon>frmPhanHoi.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmQLNhanVien.cs">
       <SubType>Form</SubType>
@@ -149,20 +136,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SQLConfig.cs" />
-    <EmbeddedResource Include="GUI\frmNhapKho.resx">
-      <DependentUpon>frmNhapKho.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmKho.resx">
-      <DependentUpon>frmKho.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmPhanHoi.resx">
-      <DependentUpon>frmPhanHoi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmHoaDon.resx">
       <DependentUpon>frmHoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmKho.resx">
+      <DependentUpon>frmKho.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmLoaiSanPham.resx">
       <DependentUpon>frmLoaiSanPham.cs</DependentUpon>
@@ -172,6 +153,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmNhapKho.resx">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmPhanHoi.resx">
+      <DependentUpon>frmPhanHoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLNhanVien.resx">
       <DependentUpon>frmQLNhanVien.cs</DependentUpon>
